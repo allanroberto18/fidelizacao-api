@@ -1,8 +1,7 @@
 import App from './app';
 import DIContainer from "./config/container";
-import IController from "./interfaces/controller";
-import UserController from "./controller/user.controller";
 import * as dotenv from 'dotenv';
+import UserController from "./controller/user.controller";
 import CombustivelController from "./controller/combustivel.controller";
 
 dotenv.config();
