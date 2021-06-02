@@ -1,11 +1,11 @@
 import UserModel from '../model/user.model';
 import { injectable } from "inversify";
 import "reflect-metadata";
-import IFactory from "./factory";
+import IFactory from "../interfaces/factory";
 
 @injectable()
 class UserFactory implements IFactory<UserModel> {
-    private users: UserModel[] = [
+    private models: UserModel[] = [
         {
             id: "ABC-123",
             idBandeira: 1,
@@ -24,8 +24,8 @@ class UserFactory implements IFactory<UserModel> {
         },
     ];
 
-    generate(): any {
-        return this.users;
+    generate(): UserModel[] {
+        return this.models;
     }
 }
 

@@ -1,8 +1,8 @@
-import UserResponse from "../response/user.response";
+import UserResponse from "../../response/user.response";
 
 interface IService<Response> {
     getAll(): Response[];
-    getUserById(id: string): Response;
+    getById(id: string): Response;
 }
 
 interface IUserService extends IService<UserResponse>{

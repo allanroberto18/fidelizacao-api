@@ -1,4 +1,5 @@
-import UserModel from "../model/user.model";
+import UserModel from "../../model/user.model";
+import {CombustivelModel} from "../../model/combustivel.model";
 
 interface IRepository<Model> {
     findAll(): Model[];

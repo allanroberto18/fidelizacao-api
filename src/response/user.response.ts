@@ -1,8 +1,8 @@
 interface UserResponse {
-    id: string,
-    nome: string,
-    email: string,
-    telefone: string
+    Id: string,
+    Nome: string,
+    Email: string,
+    Telefone: string
 }
 
 export default UserResponse;

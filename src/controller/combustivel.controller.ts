@@ -3,17 +3,18 @@ import {inject, injectable} from 'inversify';
 import "reflect-metadata";
 import TYPES from '../config/types';
 import IController from "../interfaces/controller";
-import {IUserService} from "../interfaces/service";
+import {IService, IUserService} from "../interfaces/service";
+import CombustivelResponse from "../response/combustivel.response";
 
 @injectable()
-class UserController implements IController {
+class CombustivelController implements IController {
 
-    public path = "/api/users";
+    public path = "/api/combustiveis";
     public router = Router();
-    private service: IUserService;
+    private service: IService<CombustivelResponse>;
 
     public constructor(
-        @inject(TYPES.IUserService) service: IUserService
+        @inject(TYPES.ICombustivelService) service: IService<CombustivelResponse>
     ) {
         this.service = service;
         this.initializeRoutes();
@@ -21,7 +22,6 @@ class UserController implements IController {
 
     public initializeRoutes(): void {
         this.router.get(this.path, this.getAll);
-        this.router.post(`${this.path}/auth`, this.authenticateUserByEmailAndPassword);
         this.router.get(`${this.path}/:id`, this.getById);
     }
 
@@ -47,24 +47,6 @@ class UserController implements IController {
             .send(dto)
         ;
     }
-
-    authenticateUserByEmailAndPassword = (request: Request, response: Response) => {
-        const email = request.body.email;
-        const password = request.body.password;
-        const dto = this.service.getUserByEmailAndPassword(email, password);
-
-        if (dto === null) {
-            response
-                .status(404)
-                .send('User not found')
-            ;
-        }
-
-        response
-            .status(200)
-            .send(dto)
-        ;
-    }
 }
 
-export default UserController;
+export default CombustivelController;

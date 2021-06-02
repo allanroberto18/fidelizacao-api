@@ -1,9 +1,8 @@
-import {IUserRepository} from "./repository";
+import {IUserRepository} from "../interfaces/repository";
 import UserModel from "../model/user.model";
 import {inject, injectable} from "inversify";
 import TYPES from "../config/types";
-import IFactory from "../factory/factory";
-import UserException from "../exception/user.exception";
+import IFactory from "../interfaces/factory";
 
 @injectable()
 class UserRepository implements IUserRepository {
@@ -11,7 +10,7 @@ class UserRepository implements IUserRepository {
     private _userFactory: IFactory<UserModel>;
 
     public constructor(
-        @inject(TYPES.IFactory) private userFactory: IFactory<UserModel>
+        @inject(TYPES.IUserFactory) private userFactory: IFactory<UserModel>
     ) {
         this._userFactory = userFactory;
     }
@@ -25,20 +24,20 @@ class UserRepository implements IUserRepository {
             .filter(user => user.email === email && user.senha === password);
 
         if (usersFiltered.length === 0) {
-            throw new UserException(`Invalid user or password`);
+            return null;
         }
 
         return usersFiltered[0];
     }
 
     findById(id: string): UserModel {
-        const usersFiltered = this.findAll().filter(user => user.id === id);
+        const itemsFiltered = this.findAll().filter(user => user.id === id);
 
-        if (usersFiltered.length === 0) {
-            throw new UserException(`User with id ${id} not found`);
+        if (itemsFiltered.length === 0) {
+            return null;
         }
 
-        return usersFiltered[0];
+        return itemsFiltered[0];
     }
 }
 

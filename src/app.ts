@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import {cors} from 'cors-ts';
 import 'reflect-metadata';
-import IController from "./controller/controller";
+import IController from "./interfaces/controller";
 
 class App {
     public app: express.Application;

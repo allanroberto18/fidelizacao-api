@@ -1,39 +1,39 @@
-import {IUserService} from "./service";
 import UserResponse from "../response/user.response";
-import {IUserRepository} from "../repository/repository";
+import {IUserRepository} from "../interfaces/repository";
 import {inject, injectable} from "inversify";
 import TYPES from "../config/types";
-import IMapper from "../response/mapper/mapper";
+import IMapper from "../interfaces/mapper";
 import UserModel from "../model/user.model";
+import {IUserService} from "../interfaces/service";
 
 @injectable()
 class UserService implements IUserService {
 
-    private _userRepository: IUserRepository;
-    private _userMapper: IMapper<UserModel, UserResponse>
+    private repository: IUserRepository;
+    private mapper: IMapper<UserModel, UserResponse>
 
     public constructor(
         @inject(TYPES.IUserRepository) userRepository: IUserRepository,
-        @inject(TYPES.IMapper) userMapper: IMapper<UserModel, UserResponse>
+        @inject(TYPES.ICombustivelMapper) userMapper: IMapper<UserModel, UserResponse>
     ) {
-        this._userRepository = userRepository;
-        this._userMapper = userMapper;
+        this.repository = userRepository;
+        this.mapper = userMapper;
     }
 
     getAll(): UserResponse[] {
-        return this._userRepository
+        return this.repository
             .findAll()
-            .map(this._userMapper.mapResponseFromModel);
+            .map(this.mapper.mapResponseFromModel);
     }
 
     getUserByEmailAndPassword(email: string, password: string): UserResponse {
-        const userModel = this._userRepository.findByEmailAndPassword(email, password);
-        return this._userMapper.mapResponseFromModel(userModel);
+        const model = this.repository.findByEmailAndPassword(email, password);
+        return this.mapper.mapResponseFromModel(model);
     }
 
-    getUserById(id: string): UserResponse {
-        const userModel = this._userRepository.findById(id);
-        return this._userMapper.mapResponseFromModel(userModel);
+    getById(id: string): UserResponse {
+        const model = this.repository.findById(id);
+        return this.mapper.mapResponseFromModel(model);
     }
 }
 
