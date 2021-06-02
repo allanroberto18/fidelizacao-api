@@ -1,11 +1,13 @@
 import App from './app';
-import UserController from './controller/user.controller';
+import DIContainer from "./container";
+import IController from "./controller/controller";
+import UserController from "./controller/user.controller";
 
 const PORT = 5000;
-const app = new App(
-    [
-        new UserController()
-    ], PORT
-);
+
+const userController = DIContainer.resolve<IController>(UserController);
+const app = new App([
+    userController
+], PORT);
 
 app.listen();

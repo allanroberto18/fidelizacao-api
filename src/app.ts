@@ -1,11 +1,14 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import {cors} from 'cors-ts';
+import 'reflect-metadata';
+import IController from "./controller/controller";
 
 class App {
     public app: express.Application;
     public port: number;
 
-    constructor(controllers, port: number) {
+    constructor(controllers: IController[], port: number) {
         this.app = express();
         this.port = port;
 
@@ -15,9 +18,10 @@ class App {
 
     private initializeMiddlewares() {
         this.app.use(bodyParser.json());
+        this.app.use(cors());
     }
 
-    private initializeControllers(controllers) {
+    private initializeControllers(controllers: IController[]) {
         controllers.forEach((controller) => {
             this.app.use('/', controller.router);
         });

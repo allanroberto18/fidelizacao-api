@@ -1,4 +1,4 @@
-interface User {
+interface UserModel {
     id: string,
     idBandeira: number,
     nome: string,
@@ -7,4 +7,4 @@ interface User {
     senha: string
 }
 
-export default User;
+export default UserModel;
