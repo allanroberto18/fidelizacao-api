@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "@types/cors": "^2.8.10",
+    "@types/dotenv": "^8.2.0",
+    "@types/mongoose": "^5.11.8",
     "cors-ts": "^1.0.3",
     "express": "^4.17.1",
     "inversify": "^5.1.1",
