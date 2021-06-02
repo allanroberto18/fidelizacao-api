@@ -4,7 +4,7 @@ import "reflect-metadata";
 import IFactory from "./factory";
 
 @injectable()
-class UserFactory implements IFactory {
+class UserFactory implements IFactory<UserModel> {
     private users: UserModel[] = [
         {
             id: "ABC-123",

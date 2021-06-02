@@ -1,5 +1,5 @@
 import App from './app';
-import DIContainer from "./container";
+import DIContainer from "./config/container";
 import IController from "./controller/controller";
 import UserController from "./controller/user.controller";
 import * as dotenv from 'dotenv';

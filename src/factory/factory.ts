@@ -1,5 +1,5 @@
-interface IFactory {
-    generate(): any;
+interface IFactory<T> {
+    generate(): T[];
 }
 
 export default IFactory;

@@ -8,10 +8,10 @@ import UserException from "../exception/user.exception";
 @injectable()
 class UserRepository implements IUserRepository {
 
-    private _userFactory: IFactory;
+    private _userFactory: IFactory<UserModel>;
 
     public constructor(
-        @inject(TYPES.IFactory) private userFactory: IFactory
+        @inject(TYPES.IFactory) private userFactory: IFactory<UserModel>
     ) {
         this._userFactory = userFactory;
     }

@@ -1,9 +1,12 @@
 import UserResponse from "../response/user.response";
 
-interface IUserService {
-    getAll(): UserResponse[];
-    getUserById(id: string): UserResponse;
+interface IService<Response> {
+    getAll(): Response[];
+    getUserById(id: string): Response;
+}
+
+interface IUserService extends IService<UserResponse>{
     getUserByEmailAndPassword(email: string, password: string): UserResponse;
 }
 
-export { IUserService }
+export { IService, IUserService }
