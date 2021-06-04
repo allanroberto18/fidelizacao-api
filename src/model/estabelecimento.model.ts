@@ -1,7 +1,7 @@
 import {CombustivelModel} from "./combustivel.model";
 
 interface EstabelecimentoModel {
-    id: number,
+    id: string,
     idBandeira: number,
     nomeCv: string,
     endereco: string,
